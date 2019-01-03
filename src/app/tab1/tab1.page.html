@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Club News
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    
+    
+    <ion-list>
+        <ion-item  *ngFor="let news of newsstories" button [routerLink]="['/news', news.id]">
+            <ion-thumbnail item-start>
+                <img src="/assets/shapes.svg">
+            </ion-thumbnail>
+            <h2> {{news.title}}</h2>      
+        </ion-item>
+    </ion-list>
+    
+</ion-content>

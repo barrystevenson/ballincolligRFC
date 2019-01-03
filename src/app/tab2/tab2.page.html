@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Fixtures &amp; Results
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+       
+    <ion-card *ngFor="let match of matches">  
+        <ion-card>
+            <ion-card-content>          
+              {{ match.date}}
+            </ion-card-content>    
+        </ion-card>
+         <ion-card-title> {{match.team}} </ion-card-title>
+        <ion-card>
+            <ion-card-content>          
+              {{match.time}}
+            </ion-card-content>    
+        </ion-card>
+    </ion-card>
+  
+</ion-content>
