@@ -18,4 +18,13 @@
         </ion-item>
     </ion-list>
     
+<ion-card  *ngFor="let news of newsstories" button [routerLink]="['/news', news.id]">
+  <img src="/assets/shapes.svg"/>
+  <ion-card-content>
+    <ion-card-title>
+      {{news.title}}
+    </ion-card-title>
+  </ion-card-content>
+</ion-card>
+    
 </ion-content>

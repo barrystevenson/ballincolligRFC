@@ -9,10 +9,19 @@
 <ion-content>
        
     <ion-card *ngFor="let match of matches">  
-        <ion-card>
+        <!--ion-card>
             <ion-card-content>          
               {{ match.date}}
-            </ion-card-content>    
+            </ion-card-content>
+            <ion-card>
+            <ion-card-content>          
+              {{ match.date}}
+            </ion-card-content>
+        </ion-card-->
+         <ion-card>
+            <ion-card-content>          
+              {{ match.date}}
+            </ion-card-content>
         </ion-card>
          <ion-card-title> {{match.team}} </ion-card-title>
         <ion-card>
