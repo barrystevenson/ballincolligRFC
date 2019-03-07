@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { News, NewsService } from './../services/news.service';
+import { NewsService } from './../services/news.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tab1',
@@ -8,14 +9,23 @@ import { News, NewsService } from './../services/news.service';
 })
 
 export class Tab1Page implements OnInit {
-    
-    newsstories: News[];
+    public newsStories: Array<any>;
     
     constructor(private newsService: NewsService) {}
         
     ngOnInit(){
-        this.newsService.getNewsStories().subscribe(res => {
-        this.newsstories = res;
+      
+        this.newsService.getNewsStories().get().then(newsStoriesSnapshot =>{
+            this.newsStories = [];
+            newsStoriesSnapshot.forEach(snap => {
+                this.newsStories.push({
+                    id: snap.id,
+                    title: snap.data().title,
+                    image: snap.data().image,
+                });
+                return false;
+            });
         });
+    
     }
 }

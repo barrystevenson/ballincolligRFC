@@ -8,23 +8,15 @@
 
 <ion-content>
     
-    
-    <ion-list>
-        <ion-item  *ngFor="let news of newsstories" button [routerLink]="['/news', news.id]">
-            <ion-thumbnail item-start>
-                <img src="/assets/shapes.svg">
-            </ion-thumbnail>
-            <h2> {{news.title}}</h2>      
-        </ion-item>
-    </ion-list>
-    
-<ion-card  *ngFor="let news of newsstories" button [routerLink]="['/news', news.id]">
-  <img src="/assets/shapes.svg"/>
-  <ion-card-content>
-    <ion-card-title>
-      {{news.title}}
-    </ion-card-title>
-  </ion-card-content>
+<ion-card  *ngFor="let news of newsStories" tappable routerLink="/../news/{{news.id}}">
+   
+<img src={{news?.image}}/>
+    <ion-card-content>
+        <ion-card-title>
+          {{news?.title}}
+        </ion-card-title>
+      </ion-card-content>
 </ion-card>
+    
     
 </ion-content>

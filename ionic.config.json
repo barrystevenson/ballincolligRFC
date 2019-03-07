@@ -1,6 +1,8 @@
 {
   "name": "ballincolligRFC",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "a954ce47"
 }

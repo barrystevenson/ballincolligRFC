@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
-
-export interface News {
-  title: string;    
-  body: string;  
-}
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -15,29 +10,20 @@ export interface News {
 
 export class NewsService {
 
+public newsStoriesRef: firebase.firestore.CollectionReference;
     
-  private newsCollection: AngularFirestoreCollection<News>;
-  private newsstories: Observable<News[]>;
-  
-  constructor(db: AngularFirestore) { 
-    this.newsCollection = db.collection<News>('newsstories');
-      
-      this.newsstories = this.newsCollection.snapshotChanges().pipe(
-        map(actions => {
-            return actions.map(a => {
-                const data = a.payload.doc.data();
-                const id = a.payload.doc.id;
-                return {id, ...data};
-            });
-        })
-      );
+  constructor() { 
+    this.newsStoriesRef = firebase.firestore().collection('/newsstories');
+   
   }
     
-    getNewsStories () {
-        return this.newsstories;
+    getNewsStories (): firebase.firestore.CollectionReference {
+        return this.newsStoriesRef;
     }
     
-    getNewsStory(id) {
-         return this.newsCollection.doc<News>(id).valueChanges();           
+    getNewsStory(newsStoryId: string): firebase.firestore.DocumentReference {
+         return this.newsStoriesRef.doc(newsStoryId);        
     }
+    
 }
+
