@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NewsService } from './../../services/news.service';
+import { NewsService } from './../../services/news/news.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

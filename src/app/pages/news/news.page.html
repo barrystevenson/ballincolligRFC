@@ -7,6 +7,15 @@
 
 <ion-content padding>
 
-    {{currentNewsStory?.body}}
+<ion-card>
+   
+<img src={{currentNewsStory?.image}}/>
+    <ion-card-content>
+        <ion-card-title>
+          {{currentNewsStory?.body}}
+        </ion-card-title>
+      </ion-card-content>
+</ion-card>
+    
     
 </ion-content>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Match, MatchService } from './../services/match.service';
+import { MatchService } from './../services/match/match.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tab2',
@@ -9,13 +10,22 @@ import { Match, MatchService } from './../services/match.service';
 
 export class Tab2Page implements OnInit {
     
-    matches: Match[];
+    public matches: Array<any>;
     
     constructor(private matchService: MatchService) {}
         
     ngOnInit(){
-        this.matchService.getMatches().subscribe(res => {
-        this.matches = res;
+        this.matchService.getMatches().get().then(matchSnapshot => {
+            this.matches = [];
+            matchSnapshot.forEach(snap => {
+                this.matches.push({
+                    id: snap.id,
+                    date: snap.data().date,
+                    team: snap.data().team,
+                    time: snap.data().time,
+                });
+                return false;
+                });
         });
     }
 }
