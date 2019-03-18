@@ -22,7 +22,11 @@ export class Tab2Page implements OnInit {
                     id: snap.id,
                     date: snap.data().date,
                     team: snap.data().team,
-                    time: snap.data().time,
+                    home: snap.data().home,
+                    away: snap.data().away,
+                    homeScore: snap.data().homeScore,
+                    awayScore: snap.data().awayScore,
+                    
                 });
                 return false;
                 });

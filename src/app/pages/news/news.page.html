@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
          <ion-buttons slot="start"> <ion-back-button></ion-back-button></ion-buttons>
     <ion-title>{{currentNewsStory?.title}}</ion-title>
   </ion-toolbar>
@@ -7,15 +7,13 @@
 
 <ion-content padding>
 
-<ion-card>
-   
-<img src={{currentNewsStory?.image}}/>
-    <ion-card-content>
-        <ion-card-title>
-          {{currentNewsStory?.body}}
-        </ion-card-title>
-      </ion-card-content>
-</ion-card>
+    <ion-card>
+
+        <img src={{currentNewsStory?.image}}/>
+        <ion-card-content>
+               <p>{{currentNewsStory?.body}}</p>
+          </ion-card-content>
+    </ion-card>
     
     
 </ion-content>

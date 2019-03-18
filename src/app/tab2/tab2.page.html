@@ -7,20 +7,44 @@
 </ion-header>
 
 <ion-content>
-       
-    <ion-card *ngFor="let match of matches">  
       
-         <ion-card>
-            <ion-card-content>          
-              {{match?.date}}
-            </ion-card-content>
-        </ion-card>
-         <ion-card-title>{{match?.team}}</ion-card-title>
-        <ion-card>
-            <ion-card-content>          
-              {{match?.time}}
-            </ion-card-content>    
-        </ion-card>
+     <ion-card *ngFor="let match of matches"  tappable routerLink="/../match-details/{{match.id}}">
+    
+        <ion-card-content>    
+            <ion-grid>
+                <ion-row>
+                    <ion-col></ion-col>
+                    <ion-col></ion-col>
+                    <ion-col class="team">{{match?.team}}</ion-col>
+                    <ion-col></ion-col>
+                    <ion-col></ion-col>
+                </ion-row>
+                
+                <!-- matchPlayed: If the match has been played then I don't want to show the day which it was played -->
+                <ion-row *ngIf="match?.homeScore != ''; else matchPlayed">
+                   {{match?.date.seconds * 1000 | date:'d MMM yy' }}
+                </ion-row>
+                <ng-template #matchPlayed>
+                   <ion-row> {{match?.date.seconds * 1000 | date:'EE d MMM yy' }}</ion-row>
+                </ng-template> 
+                <!-- matchPlayedEnd: End -->
+                
+                <!-- noScoreReceived: If the match has been played and scores updated then display scores else show 'v' between team names-->
+                <ion-row *ngIf="match?.homeScore != ''; else noScoreReceived">
+                    <ion-col>{{match?.home}}</ion-col>
+                    <ion-col>{{match?.homeScore}} - {{match?.awayScore}}</ion-col>
+                    <ion-col> {{match?.away}}</ion-col>
+                </ion-row>
+                <ng-template #noScoreReceived>
+                    <ion-col>{{match?.home}}</ion-col> 
+                    <ion-col> v </ion-col>
+                    <ion-col> {{match?.away}}</ion-col>
+                </ng-template> 
+               <!-- noScoreReceived -->
+                
+                <ion-row> {{match?.date.seconds * 1000 | date:'h:mm a' }}</ion-row>
+            </ion-grid>    
+        </ion-card-content>
     </ion-card>
   
-</ion-content>
+</ion-content>\

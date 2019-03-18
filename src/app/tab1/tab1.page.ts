@@ -22,6 +22,7 @@ export class Tab1Page implements OnInit {
                     id: snap.id,
                     title: snap.data().title,
                     image: snap.data().image,
+                    date: snap.data().date,
                 });
                 return false;
             });

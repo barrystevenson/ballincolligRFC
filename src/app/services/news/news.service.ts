@@ -17,8 +17,9 @@ public newsStoriesRef: firebase.firestore.CollectionReference;
    
   }
     
-    getNewsStories (): firebase.firestore.CollectionReference {
-        return this.newsStoriesRef;
+    getNewsStories (): firebase.firestore.Query {
+        return this.newsStoriesRef.orderBy("date","desc");
+         
     }
     
     getNewsStory(newsStoryId: string): firebase.firestore.DocumentReference {
