@@ -2,27 +2,25 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+
 import { IonicModule } from '@ionic/angular';
-import { MatchDetailsPageRoutingModule } from './match-details.router.module';
-import { MatchDetailsPage } from './match-details.page';
+
+import { MatchReportPage } from './match-report.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: MatchDetailsPage
+    component: MatchReportPage
   }
 ];
 
 @NgModule({
   imports: [
-    IonicModule,
     CommonModule,
     FormsModule,
-    //MatchDetailsPageRoutingModule
-    RouterModule.forChild(routes)     
+    IonicModule,
+    RouterModule.forChild(routes)
   ],
-  declarations: [MatchDetailsPage]
+  declarations: [MatchReportPage]
 })
-export class MatchDetailsPageModule {}
-
-
+export class MatchReportPageModule {}
