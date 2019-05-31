@@ -3,12 +3,12 @@ import { NewsService } from './../services/news/news.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-news',
+  templateUrl: 'news.page.html',
+  styleUrls: ['news.page.scss']
 })
 
-export class Tab1Page implements OnInit {
+export class NewsPage implements OnInit {
     public newsStories: Array<any>;
     
     constructor(private newsService: NewsService) {}

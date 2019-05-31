@@ -3,12 +3,12 @@ import { MatchService } from './../services/match/match.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  selector: 'app-fixtures',
+  templateUrl: 'fixtures.page.html',
+  styleUrls: ['fixtures.page.scss']
 })
 
-export class Tab2Page implements OnInit {
+export class FixturesPage implements OnInit {
     
     public matches: Array<any>;
     

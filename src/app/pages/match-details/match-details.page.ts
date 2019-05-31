@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class MatchDetailsPage implements OnInit {
   
   public currentMatchDetails: any = {};
+  public lineup: Array<any>;
     
   constructor(private matchService: MatchService, 
               private route: ActivatedRoute) { }
@@ -21,6 +22,19 @@ export class MatchDetailsPage implements OnInit {
          this.currentMatchDetails = matchDetailsSnapshot.data();
          this.currentMatchDetails.id = matchDetailsSnapshot.id;
      });
+      
+     this.matchService.getMatchLineup(matchId).get().then(matchLineupSnapshot =>{
+        this.lineup = [];
+            matchLineupSnapshot.forEach(snap => {
+                this.lineup.push({
+                    id: snap.id,
+                    name: snap.data().name,
+                    number: snap.data().number,
+                });
+                return false;
+            });
+        });
+      
   }
 
 }

@@ -3,6 +3,16 @@
     <ion-title>
       Ballincollig RFC
     </ion-title>
+      <ion-buttons slot="end">
+      <ion-button>
+         <!--ion-icon slot="icon-only" src="../../assets/shapes.svg"></ion-icon-->
+        <!--ion-icon src="../../assets/icon/favicon.png"></ion-icon-->
+           <!--ion-icon src="../../assets/Logo_Ballincollig_RFC_Smaller.svg"></ion-icon-->
+          <!--ion-icon src="../../assets/spades.svg"></ion-icon-->
+          <ion-icon src="../../assets/Rugby-Ball-Reverse-02.svg"></ion-icon>
+        <!--ion-icon slot="icon-only" name="person"></ion-icon-->
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -11,16 +21,22 @@
 <ion-tabs>
 
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1">
-      <ion-icon name="megaphone"></ion-icon>
-      <ion-label>News</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="tab2">
-      <ion-icon name="calendar"></ion-icon>
+   
+    <ion-tab-button tab="fixtures">
+      <!--ion-icon name="calendar"></ion-icon-->
       <ion-label>Fixtures</ion-label>
     </ion-tab-button>
-
+      
+      <ion-tab-button tab="news">
+      <!--ion-icon name="calendar"></ion-icon-->
+      <ion-label>News</ion-label>
+    </ion-tab-button>
+      
+    <ion-tab-button tab="players">
+      <!--ion-icon name="contacts"></ion-icon-->
+      <ion-label>Player Profiles</ion-label>
+    </ion-tab-button>
+      
   </ion-tab-bar>
 
 </ion-tabs>

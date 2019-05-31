@@ -8,33 +8,44 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'news',
         children: [
           {
             path: '',
-            loadChildren: '../tab1/tab1.module#Tab1PageModule'
+            loadChildren: '../tab1/news.module#NewsPageModule'
           }
         ]
       },
       {
-        path: 'tab2',
+        path: 'fixtures',
         children: [
           {
             path: '',
-            loadChildren: '../tab2/tab2.module#Tab2PageModule'
+            loadChildren: '../tab2/fixtures.module#FixturesPageModule'
+          }
+        ]
+      },
+      {
+        path: 'players',
+        children: [
+          {
+            path: '',
+            loadChildren: '../tab3/players.module#PlayersPageModule'
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        //redirectTo: '/tabs/fixtures',
+          redirectTo: '/tabs/fixtures',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/fixtures',
+    //redirectTo: '/tabs/fixtures',
     pathMatch: 'full'
   }
 ];
