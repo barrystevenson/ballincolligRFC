@@ -22,22 +22,26 @@
         
     <ion-card>
           <ion-card-header>
-             {{currentMatchDetails?.date.seconds * 1000 | date:'h:mm a' }}, {{currentMatchDetails?.date.seconds * 1000 | date:'d MMM yy' }}, Tanner Park
+            <!--  *** Errors here *** when I use .ndate I get an error on Chrome - not sure what I should be using to get the date value, it actually shows the value I expect -->
+               {{currentMatchDetails?.date.seconds * 1000 | date:'h:mm a' }}, {{currentMatchDetails?.date.seconds * 1000 | date:'d MMM yy' }}, Tanner Park
         </ion-card-header>
       <ion-card-content>
          <ion-list>  
           <!-- include an if statement to see if tries have been scored - only display this item in that case -->
           <ion-item>  
             <ion-label>Tries:</ion-label>
-            <ion-col *ngFor="let tryScorer of tryScorers">{{tryScorer.name}} </ion-col>
+            <!--ion-col *ngFor="let tryScorer of tryScorers">{{tryScorer.name}} </ion-col-->
+              <div  class="align-left" *ngFor="let tryScorer of tryScorers">{{tryScorer.name}} </div>
           </ion-item>
             <!-- include an if statement to see if conversions have been scored - only display this item in that case -->
           <ion-item>
             <ion-label>Convs:</ion-label>
+            <ion-col *ngFor="let conversionScorer of conversionScorers">{{conversionScorer.name}} </ion-col>
           </ion-item>
             <!-- include an if statement to see if penalites have been scored - only display this item in that case -->
           <ion-item>
             <ion-label>Pens:</ion-label>
+            <ion-col *ngFor="let penaltyScorer of penaltyScorers">{{penaltyScorer.name}} </ion-col>
           </ion-item>
             <!-- include an if statement to see if Drop Kicks have been scored - only display this item in that case -->
           <ion-item>
