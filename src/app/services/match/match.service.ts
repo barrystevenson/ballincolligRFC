@@ -47,6 +47,7 @@ export class MatchService {
   getConversionScorers (matchId: string): firebase.firestore.Query {
        this.conversionScorersRef = firebase.firestore().collection('/matches/' + matchId + '/conversions');
        return this.conversionScorersRef.orderBy("name","asc");
+      
     }
 
 }
