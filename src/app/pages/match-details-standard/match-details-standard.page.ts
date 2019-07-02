@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatchService } from './../../services/match/match.service';
-import { ActivatedRoute } from '@angular/router';
+import { HelperService } from './../../services/helper/helper.service';
+import { PlayersService } from './../../services/players/players.service';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-match-details-standard',
@@ -15,37 +18,60 @@ export class MatchDetailsStandardPage implements OnInit {
   public tryScorers: Array<any>;
   public penaltyScorers: Array<any>;
   public conversionScorers: Array<any>;
- 
+  public dropGoalScorers: Array<any>;
+  public allPlayers: Array<any>;
+    
     constructor(private matchService: MatchService, 
-              private route: ActivatedRoute) { }
+                private playersService: PlayersService, 
+                private helperService: HelperService, 
+                private route: ActivatedRoute, 
+                private router: Router) { }
 
   ngOnInit() {
     const matchId: string = this.route.snapshot.paramMap.get('id');
-     this.matchService.getMatch(matchId).get()
-      .then(matchDetailsSnapshot=> {
-         this.currentMatchDetails = matchDetailsSnapshot.data();
-         this.currentMatchDetails.id = matchDetailsSnapshot.id;
-     });
-      
-     /*
-     * Return the Match Lineup 
+    
+    this.returnMatchDetails(matchId);
+    this.returnMatchLineup(matchId);
+    this.returnTryScorers(matchId);
+    this.returnPenaltyScorers(matchId);
+    this.returnConversionScorers(matchId);
+    this.returnDropGoalScorers(matchId);
+    this.returnAllPlayers();
+     }
+    
+    /*
+     * Return Match Details
      */
-     this.matchService.getMatchLineup(matchId).get().then(matchLineupSnapshot =>{
+    
+    private async returnMatchDetails(matchId: string){     
+        const matchDetailsSnapshot = await this.matchService.getMatch(matchId).get();
+        this.currentMatchDetails = matchDetailsSnapshot.data();
+        this.currentMatchDetails.id = matchDetailsSnapshot.id; 
+    }
+    
+    /*
+     * Return the Match Lineup 
+     */ 
+    private async returnMatchLineup(matchId: string){
+        const matchLineupSnapshot = await this.matchService.getMatchLineup(matchId).get();
         this.lineup = [];
-            matchLineupSnapshot.forEach(snap => {
+         matchLineupSnapshot.forEach(snap => {
                 this.lineup.push({
                     id: snap.id,
-                    name: snap.data().name,
                     number: snap.data().number,
+                    firstName: snap.data().firstName,
+                    surname: snap.data().surname,
                 });
                 return false;
             });
-        });
+        }
         
      /*
      * Return the Try scorers 
      */
-     this.matchService.getTryScorers(matchId).get().then(tryScorersSnapshot =>{
+    
+    private async returnTryScorers(matchId: string){   
+        const tryScorersSnapshot = await this.matchService.getTryScorers(matchId).get();
         this.tryScorers = [];
             tryScorersSnapshot.forEach(snap => {
                 this.tryScorers.push({
@@ -58,13 +84,16 @@ export class MatchDetailsStandardPage implements OnInit {
         /*
         * Sort the scorers into a more readable format
         */
-        //this.getSortedScorers(this.tryScorers);
-        });
+        this.helperService.getSortedScorers(this.tryScorers);
+        this.helperService.addCommasToArray(this.tryScorers);
+        }
       
      /*
      * Return the Penalty scorers 
      */
-     this.matchService.getPenaltyScorers(matchId).get().then(penaltyScorersSnapshot =>{
+
+    private async returnPenaltyScorers(matchId: string){ 
+        const penaltyScorersSnapshot = await this.matchService.getPenaltyScorers(matchId).get();
         this.penaltyScorers = [];
             penaltyScorersSnapshot.forEach(snap => {
                 this.penaltyScorers.push({
@@ -77,16 +106,40 @@ export class MatchDetailsStandardPage implements OnInit {
         /*
         * Sort the scorers into a more readable format
         */
-        this.getSortedScorers(this.penaltyScorers);
-        }); 
+        this.helperService.getSortedScorers(this.penaltyScorers);
+        this.helperService.addCommasToArray(this.penaltyScorers);
+        } 
       
      /*
      * Return the Conversion scorers 
      */
-     this.matchService.getConversionScorers(matchId).get().then(conversionScorersSnapshot =>{
+     private async returnConversionScorers(matchId: string){
+        const conversionScorersSnapshot = await this.matchService.getConversionScorers(matchId).get();
         this.conversionScorers = [];
             conversionScorersSnapshot.forEach(snap => {
                 this.conversionScorers.push({
+                    id: snap.id,
+                    name: snap.data().name,
+                    
+                });
+                return false;
+            });
+            
+        /*
+        * Sort the scorers into a more readable format
+        */
+        this.helperService.getSortedScorers(this.conversionScorers);
+        this.helperService.addCommasToArray(this.conversionScorers); 
+        }
+      
+     /*
+     * Return the dropGoal scorers 
+     */
+     private async returnDropGoalScorers(matchId: string){
+        const dropGoalScorersSnapshot = await this.matchService.getDropGoalScorers(matchId).get();
+        this.dropGoalScorers = [];
+            dropGoalScorersSnapshot.forEach(snap => {
+                this.dropGoalScorers.push({
                     id: snap.id,
                     name: snap.data().name,
                 });
@@ -96,40 +149,57 @@ export class MatchDetailsStandardPage implements OnInit {
         /*
         * Sort the scorers into a more readable format
         */
-        this.getSortedScorers(this.conversionScorers);
-        }); 
-  }
-    
-   /*
-   * Remove duplicate names from the scorers list. e.g. If John Smith scores 3 tries
-   * I don't want to see John Smith, John Smith, John Smith - I want to see John Smith (3)
-   */
-    getSortedScorers(scorers: Array<any>) : Array<any> {
+        this.helperService.getSortedScorers(this.dropGoalScorers);
+        this.helperService.addCommasToArray(this.dropGoalScorers); 
+        } 
+      
+     
+      /*
+      * Get All Players
+      */
+      private async returnAllPlayers(){
+        const playersSnapshot = await this.playersService.getPlayersList().get();      
+        this.allPlayers = [];
+            playersSnapshot.forEach(snap => {
+                this.allPlayers.push({
+                    id: snap.id,
+                    firstName: snap.data().firstName,
+                    surname: snap.data().surname,
+                    //photoLocation: snap.data().photoLocation,
+                });
+                return false;
+                });
        
-        for (let i = 0; scorers.length ; i++){
-            var numberScored = 1;
-            
-            //*** Errors here *** when I use .name I get an error on Chrome - not sure what I should be using to get the name value 
-            // It seems to do the logic correctly
-            var scorerName = scorers[i].name;
-            
-            for (let j = i +1 ; scorers.length - j;) {
-                
-                if(scorers[i].name.includes(scorers[j].name)) {
-                 
-                    numberScored++;
-                    scorers[i].name = scorerName + " (" + numberScored + ")";
-                    scorers.splice(j,1);
-                    }
-                else{
-                    //Only incerement the j if we haven't spliced the array
-                    j++;
-                    }
-                }
+        }
+
+ /*
+ * Navigate to the details page of the specific player in the lineup clicked
+ */
+    
+ navigateToPlayerDetails(firstName: String, surname: String, players: Array<any>)
+    {   
+        var playerId = this.getPlayerId(firstName, surname, players);
+        if (playerId)
+            {
+            this.router.navigateByUrl('player-details/'+ playerId);
             }
-        return scorers;
+    }
+    
+ /*
+ * Get the Id of the player clicked on from their Name
+ */
+    
+ getPlayerId(firstName: String, surname: String, players: Array<any>) : String {
         
-    } 
+        for (var i = 0; i < players.length; i++ ){
+            if(players[i].surname == surname) {
+                if(players[i].firstName == firstName)
+                    {
+                        return players[i].id                 
+                    }
+            }
+        }    
+    }
 
 }
 

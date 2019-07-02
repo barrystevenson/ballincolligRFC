@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PlayersService } from './../services/players/players.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -8,8 +9,23 @@ import { Observable } from 'rxjs';
 })
 
 export class PlayersPage implements OnInit {
-
-    constructor() {}
+    
+    public players: Array<any>;
+    
+    constructor(private playersService: PlayersService) {}
         
-    ngOnInit(){ }
+    ngOnInit(){
+        this.playersService.getPlayersList().get().then(playersSnapshot => {
+            this.players = [];
+            playersSnapshot.forEach(snap => {
+                this.players.push({
+                    id: snap.id,
+                    firstName: snap.data().firstName,
+                    surname: snap.data().surname,
+                    photoLocation: snap.data().photoLocation,
+                });
+                return false;
+                });
+        });
+    }
 }

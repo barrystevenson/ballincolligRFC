@@ -8,7 +8,9 @@ ion-row {
 
 .team{
     background-color: black;
-    color: gold
+    color: gold;
+    ion-col {
+        font-size: small;}
 }
 
 .score{

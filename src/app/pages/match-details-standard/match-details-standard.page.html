@@ -1,13 +1,13 @@
-<ion-header class="match-details">
-  <ion-toolbar>
-        <ion-buttons slot="start"> <ion-button routerLink="../../tabs/fixtures"> <ion-icon slot="icon-only" name="arrow-back"></ion-icon></ion-button></ion-buttons>
+<ion-header>
+  <ion-toolbar color="dark" class="ion-icon-toolbar">
+        <ion-buttons slot="start"><ion-button href="../../tabs/fixtures"> <ion-icon slot="icon-only" name="arrow-back"></ion-icon></ion-button></ion-buttons>
         <ion-title>
             <div class="small-text">{{currentMatchDetails?.team}}</div>
             <br/>
             
             <div>
                    {{currentMatchDetails?.home}}
-                   {{currentMatchDetails?.homeScore}} - {{currentMatchDetails?.awayScore}} 
+                   {{currentMatchDetails?.homeScore}} v {{currentMatchDetails?.awayScore}} 
                    {{currentMatchDetails?.away}}
                 
                 </div>
@@ -21,36 +21,32 @@
 <ion-content padding>
         
     <ion-card>
-          <ion-card-header>
-            <!--  *** Errors here *** when I use .ndate I get an error on Chrome - not sure what I should be using to get the date value, it actually shows the value I expect -->
-               {{currentMatchDetails?.date.seconds * 1000 | date:'h:mm a' }}, {{currentMatchDetails?.date.seconds * 1000 | date:'d MMM yy' }}, Tanner Park
+          <ion-card-header *ngIf="currentMatchDetails?.date">
+               {{currentMatchDetails?.date.seconds * 1000 | date:'h:mm a' }}, {{currentMatchDetails?.date.seconds * 1000 | date:'d MMM yy' }},{{currentMatchDetails?.venue}}
         </ion-card-header>
       <ion-card-content>
          <ion-list>  
           <!-- include an if statement to see if tries have been scored - only display this item in that case -->
           <ion-item>  
-            <ion-label>Tries:</ion-label>
-            <!--ion-col *ngFor="let tryScorer of tryScorers">{{tryScorer.name}} </ion-col-->
-              <div  class="align-left" *ngFor="let tryScorer of tryScorers">{{tryScorer.name}} </div>
+            <ion-label text-wrap>Tries: <font *ngFor="let tryScorer of tryScorers">{{tryScorer.name}} </font>
+            </ion-label>
+              
           </ion-item>
             <!-- include an if statement to see if conversions have been scored - only display this item in that case -->
           <ion-item>
-            <ion-label>Convs:</ion-label>
-            <ion-col *ngFor="let conversionScorer of conversionScorers">{{conversionScorer.name}} </ion-col>
+            <ion-label text-wrap>Conversions: <font *ngFor="let conversionScorer of conversionScorers">{{conversionScorer.name}} </font></ion-label>
+            
           </ion-item>
             <!-- include an if statement to see if penalites have been scored - only display this item in that case -->
           <ion-item>
-            <ion-label>Pens:</ion-label>
-            <ion-col *ngFor="let penaltyScorer of penaltyScorers">{{penaltyScorer.name}} </ion-col>
+            <ion-label text-wrap>Penalties: <font *ngFor="let penaltyScorer of penaltyScorers">{{penaltyScorer.name}} </font></ion-label>
+            
           </ion-item>
             <!-- include an if statement to see if Drop Kicks have been scored - only display this item in that case -->
-          <ion-item>
-            <ion-label>DKs:</ion-label>
+          <ion-item *ngIf="dropGoalScorers != ''">
+            <ion-label text-wrap>Drop Goals: <font *ngFor="let dropGoalScorer of dropGoalScorers">{{dropGoalScorer.name}} </font></ion-label>
           </ion-item>
-             <!-- include an if statement to see if a Penalty Tries have been scored - only display this item in that case -->
-          <ion-item>
-            <ion-label>Pen Tries:</ion-label>
-          </ion-item>
+          
         </ion-list>
       </ion-card-content>
     </ion-card>
@@ -64,14 +60,14 @@
       </ion-card-content>
     </ion-card>
     
-      <ion-card *ngIf="currentMatchDetails?.homeScore != ''">
+      <ion-card *ngIf="lineup != ''">
         <ion-card-header>
             Team Lineup
         </ion-card-header>
         <ion-card-content>
-          <ion-list *ngFor="let player of lineup" >  
-            <ion-item>
-             {{player?.number}}.  {{player?.name}}
+          <ion-list *ngFor="let player of lineup">  
+            <ion-item (click)="navigateToPlayerDetails(player?.firstName,player?.surname,allPlayers)">
+             {{player?.number}}.  {{player?.firstName}} {{player?.surname}}  
               </ion-item>
             </ion-list>
       </ion-card-content>
