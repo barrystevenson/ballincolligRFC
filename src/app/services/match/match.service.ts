@@ -24,7 +24,7 @@ export class MatchService {
 
   getMatches (): firebase.firestore.Query {
         return this.matchesRef.orderBy("date","desc");
-    }
+      }
     
   getMatch(matchId: string): firebase.firestore.DocumentReference {
          return this.matchesRef.doc(matchId);        

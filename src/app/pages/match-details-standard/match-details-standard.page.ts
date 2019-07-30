@@ -165,8 +165,7 @@ export class MatchDetailsStandardPage implements OnInit {
                     id: snap.id,
                     firstName: snap.data().firstName,
                     surname: snap.data().surname,
-                    //photoLocation: snap.data().photoLocation,
-                });
+                 });
                 return false;
                 });
        

@@ -30,9 +30,7 @@ export class HelperService {
         for (let i = 0; i < scorers.length ; i++){
             var numberScored = 1;
             
-            //*** Errors here *** when I use .name I get an error on Chrome - not sure what I should be using to get the name value 
-            // It seems to do the logic correctly
-            var scorerName = scorers[i].name;
+             var scorerName = scorers[i].name;
             
             for (let j = i +1 ; scorers.length - j;) {
                 

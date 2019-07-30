@@ -66,7 +66,7 @@
         </ion-card-header>
         <ion-card-content>
           <ion-list *ngFor="let player of lineup">  
-            <ion-item (click)="navigateToPlayerDetails(player?.firstName,player?.surname,allPlayers)">
+            <ion-item tappable (click)="navigateToPlayerDetails(player?.firstName,player?.surname,allPlayers)">
              {{player?.number}}.  {{player?.firstName}} {{player?.surname}}  
               </ion-item>
             </ion-list>
