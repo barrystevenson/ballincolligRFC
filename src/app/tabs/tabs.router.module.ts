@@ -36,8 +36,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        //redirectTo: '/tabs/fixtures',
-          redirectTo: '/tabs/fixtures',
+        redirectTo: '/tabs/fixtures',
         pathMatch: 'full'
       }
     ]
@@ -45,7 +44,6 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: '/tabs/fixtures',
-    //redirectTo: '/tabs/fixtures',
     pathMatch: 'full'
   }
 ];

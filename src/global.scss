@@ -22,9 +22,7 @@ ion-card {
 }
 
 ion-toolbar {
-    background: dark;
-    color: darkblue;
-    background-color: aqua;
+     background-color: black;
 }
 
 ion-label {
@@ -41,6 +39,11 @@ ion-label {
     ion-toolbar{
         color: black;
     }
+}
+
+ion-button {
+    color: gold;
+    background-color: black;
 }
 
 
