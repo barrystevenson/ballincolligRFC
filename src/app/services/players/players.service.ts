@@ -18,7 +18,7 @@ public playerByNameRef: firebase.firestore.CollectionReference;
   }
     
     getPlayersList (): firebase.firestore.Query {
-        return this.playersRef.orderBy("surname","desc");
+        return this.playersRef.orderBy("surname","asc");
          }
 
     

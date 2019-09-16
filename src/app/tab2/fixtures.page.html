@@ -3,11 +3,14 @@
      <ion-card *ngFor="let match of matches; let i = index"  tappable routerLink="/../match-details-standard/{{match.id}}" id='{{i}}'>
     
          <ion-card-content>
-            <ion-grid >
+            <ion-grid>
                 <ion-row>
                     <ion-col></ion-col>
                     <ion-col></ion-col>
-                    <ion-col class="team" col-3>{{match?.team}}</ion-col>
+                    <ion-col class="team" col-3>{{match?.team}} 
+                        <font *ngIf="match?.competition == 'League'; else cupGame">L</font>
+                        <ng-template #cupGame><font>Cup</font></ng-template>
+                    </ion-col>
                     <ion-col></ion-col>
                     <ion-col></ion-col>
                 </ion-row>

@@ -16,6 +16,7 @@ export class MatchService {
  public penaltyScorersRef: firebase.firestore.CollectionReference;
  public conversionScorersRef: firebase.firestore.CollectionReference;
  public dropGoalScorersRef: firebase.firestore.CollectionReference;
+ public paragraphsRef: firebase.firestore.CollectionReference;
  
     
   constructor() { 
@@ -55,6 +56,10 @@ export class MatchService {
        this.dropGoalScorersRef = firebase.firestore().collection('/matches/' + matchId + '/dropGoals');
        return this.dropGoalScorersRef.orderBy("name","asc");
       
+    }
+ getAllParagaraphs (matchId: string): firebase.firestore.Query {
+       this.paragraphsRef = firebase.firestore().collection('/matches/' + matchId + '/paragraphs');
+       return this.paragraphsRef;
     }
 
 }

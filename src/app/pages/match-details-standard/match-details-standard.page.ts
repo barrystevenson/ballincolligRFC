@@ -20,6 +20,7 @@ export class MatchDetailsStandardPage implements OnInit {
   public conversionScorers: Array<any>;
   public dropGoalScorers: Array<any>;
   public allPlayers: Array<any>;
+  public matchReportParagraphs: Array<any>;
     
     constructor(private matchService: MatchService, 
                 private playersService: PlayersService, 
@@ -37,6 +38,7 @@ export class MatchDetailsStandardPage implements OnInit {
     this.returnConversionScorers(matchId);
     this.returnDropGoalScorers(matchId);
     this.returnAllPlayers();
+    this.returnAllParagraphs(matchId);
      }
     
     /*
@@ -198,6 +200,18 @@ export class MatchDetailsStandardPage implements OnInit {
                     }
             }
         }    
+    }
+    
+  private async returnAllParagraphs(matchId: string){
+        const matchReportParagraphSnapshot = await this.matchService.getAllParagaraphs(matchId).get();
+        this.matchReportParagraphs = [];
+         matchReportParagraphSnapshot.forEach(snap => {
+                this.matchReportParagraphs.push({
+                    id: snap.id,
+                    paragraph: snap.data().paragraph,
+                });
+                return false;
+            });
     }
 
 }

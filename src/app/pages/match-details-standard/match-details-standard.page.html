@@ -2,7 +2,7 @@
   <ion-toolbar color="black" class="ion-icon-toolbar">
         <ion-buttons slot="start"><ion-button href="../../tabs/fixtures"> <ion-icon slot="icon-only" name="arrow-back"></ion-icon></ion-button></ion-buttons>
         <ion-title>
-            <div class="small-text">{{currentMatchDetails?.team}}</div>
+            <div class="small-text">{{currentMatchDetails?.team}} {{currentMatchDetails?.competition}}</div>
             <br/>
             
             <div>
@@ -13,7 +13,9 @@
                 </div>
             <br/>
         </ion-title>
-       
+         <ion-buttons slot="end">
+        <ion-icon slot="end" src="../../assets/icon/logo.svg" size="large"></ion-icon>
+    </ion-buttons>
    </ion-toolbar>
     
 </ion-header>
@@ -43,7 +45,7 @@
             
           </ion-item>
             <!-- include an if statement to see if Drop Kicks have been scored - only display this item in that case -->
-          <ion-item *ngIf="dropGoalScorers != ''">
+          <ion-item *ngIf="dropGoalScorers?.length > 0">
             <ion-label text-wrap>Drop Goals: <font *ngFor="let dropGoalScorer of dropGoalScorers">{{dropGoalScorer.name}} </font></ion-label>
           </ion-item>
           
@@ -51,16 +53,16 @@
       </ion-card-content>
     </ion-card>
     
-     <ion-card *ngIf="currentMatchDetails?.report != ''">
+     <ion-card *ngIf="matchReportParagraphs?.length > 0">
          <ion-card-header>
             Match Report
          </ion-card-header>
       <ion-card-content>
-        <p>Match report goes here</p>
+        <p *ngFor="let matchReportParagraph of matchReportParagraphs">{{matchReportParagraph?.paragraph}}</p>
       </ion-card-content>
     </ion-card>
     
-      <ion-card *ngIf="lineup != ''">
+      <ion-card *ngIf="lineup?.length > 0">
         <ion-card-header>
             Team Lineup
         </ion-card-header>

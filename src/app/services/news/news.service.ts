@@ -11,6 +11,7 @@ import 'firebase/storage';
 export class NewsService {
 
 public newsStoriesRef: firebase.firestore.CollectionReference;
+public paragraphsRef: firebase.firestore.CollectionReference;
     
   constructor() { 
     this.newsStoriesRef = firebase.firestore().collection('/newsstories');
@@ -24,6 +25,11 @@ public newsStoriesRef: firebase.firestore.CollectionReference;
     
     getNewsStory(newsStoryId: string): firebase.firestore.DocumentReference {
          return this.newsStoriesRef.doc(newsStoryId);        
+    }
+    
+    getAllParagaraphs (newsStoryId: string): firebase.firestore.Query {
+       this.paragraphsRef = firebase.firestore().collection('/newsstories/' + newsStoryId + '/paragraphs');
+       return this.paragraphsRef;
     }
     
 }

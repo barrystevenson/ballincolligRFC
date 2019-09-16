@@ -27,6 +27,7 @@ export class FixturesPage implements OnInit {
                     away: snap.data().away,
                     homeScore: snap.data().homeScore,
                     awayScore: snap.data().awayScore,
+                    competition: snap.data().competition,
                 });
                 return false;
                 });                
@@ -70,6 +71,20 @@ export class FixturesPage implements OnInit {
         let yOffset = document.getElementById(element).offsetTop;       
         this.content.scrollToPoint(0,yOffset);
         }
+
+    matchDateEqualToToday (matchDate: Date): string {
+        
+        //const matchDateFormatted = new Date(matchDate.seconds * 1000);
+        const today: Date = new Date();
+        console.log("today = " + today.toISOString().substr(0,10));
+        console.log("match Date = " + matchDate.toISOString().substr(0,10));
+        if(today.toISOString().substr(0,10) == matchDate.toISOString().substr(0,10)) {
+           return 'matchToday'; 
+        }
+        else{
+            return 'matchNotToday';
+            }
+    }
     
 }
 

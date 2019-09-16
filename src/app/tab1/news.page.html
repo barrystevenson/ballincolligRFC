@@ -2,7 +2,7 @@
     
 <ion-card  *ngFor="let news of newsStories" tappable routerLink="/../news/{{news.id}}">
    
-<img src={{news?.image}}/>
+<img [src]="news?.image || '/assets/images/Crest.png'"/>
     <ion-card-content>
         <ion-card-title>
           {{news?.title}}

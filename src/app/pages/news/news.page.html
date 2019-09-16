@@ -1,19 +1,31 @@
 <ion-header>
   <ion-toolbar color="black" class="ion-icon-toolbar">
-         <ion-buttons slot="start"><ion-button routerLink="../../tabs/news"> <ion-icon slot="icon-only" name="arrow-back"></ion-icon></ion-button></ion-buttons>
-    <ion-title>{{currentNewsStory?.title}}</ion-title>
-  </ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-button routerLink="../../tabs/news"> 
+            <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <ion-title>News</ion-title>
+    <ion-buttons slot="end">
+         <ion-button>
+            <ion-icon slot="end" src="../../assets/icon/logo.svg" size="large"></ion-icon>
+         </ion-button>
+    </ion-buttons>
+ </ion-toolbar>
+     
 </ion-header>
 
 <ion-content padding>
 
     <ion-card>
 
-        <img src={{currentNewsStory?.image}}/>
+        <img [src]="currentNewsStory?.image || '/assets/images/Crest.png'"/>
         <ion-card-content>
-               <p>{{currentNewsStory?.body}}</p>
+          <ion-card-header>
+            <ion-card-title>{{currentNewsStory?.title}}</ion-card-title>
+            </ion-card-header>   
+            <p *ngFor="let newsParagraph of newsParagraphs">{{newsParagraph?.paragraph}}</p>
           </ion-card-content>
     </ion-card>
-    
     
 </ion-content>

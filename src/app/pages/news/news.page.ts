@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class NewsPage implements OnInit {
  public currentNewsStory: any = {};
+ public newsParagraphs: Array<any>;    
     
  constructor(private newsService: NewsService, 
               private route: ActivatedRoute) {}
@@ -20,6 +21,19 @@ export class NewsPage implements OnInit {
          this.currentNewsStory = newsStorySnapshot.data();
          this.currentNewsStory.id = newsStorySnapshot.id;
      });
+  this.returnAllParagraphs(newsId);
   }
+    
+    private async returnAllParagraphs(newsId: string){
+        const paragraphSnapshot = await this.newsService.getAllParagaraphs(newsId).get();
+        this.newsParagraphs = [];
+         paragraphSnapshot.forEach(snap => {
+                this.newsParagraphs.push({
+                    id: snap.id,
+                    paragraph: snap.data().paragraph,
+                });
+                return false;
+            });
+    }
  
 }
