@@ -1,6 +1,6 @@
 form {
   margin-bottom: 32px;
-  button {
+    button {
     margin-top: 20px !important;
   }
 }
@@ -39,3 +39,8 @@ ion-input {
     width: 140px;
     height: 160px;
   }
+
+ion-button {
+    color: gold;
+    background-color: black
+}

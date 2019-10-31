@@ -72,19 +72,6 @@ export class FixturesPage implements OnInit {
         this.content.scrollToPoint(0,yOffset);
         }
 
-    matchDateEqualToToday (matchDate: Date): string {
-        
-        //const matchDateFormatted = new Date(matchDate.seconds * 1000);
-        const today: Date = new Date();
-        console.log("today = " + today.toISOString().substr(0,10));
-        console.log("match Date = " + matchDate.toISOString().substr(0,10));
-        if(today.toISOString().substr(0,10) == matchDate.toISOString().substr(0,10)) {
-           return 'matchToday'; 
-        }
-        else{
-            return 'matchNotToday';
-            }
-    }
     
 }
 

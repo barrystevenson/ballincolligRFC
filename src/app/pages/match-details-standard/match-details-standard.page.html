@@ -5,12 +5,20 @@
             <div class="small-text">{{currentMatchDetails?.team}} {{currentMatchDetails?.competition}}</div>
             <br/>
             
-            <div>
+                <div *ngIf="currentMatchDetails?.homeScore != ''; else matchNotPlayed">
+                   {{currentMatchDetails?.home}}
+                   {{currentMatchDetails?.homeScore}} - {{currentMatchDetails?.awayScore}} 
+                   {{currentMatchDetails?.away}}
+                
+                </div>
+             <ng-template #matchNotPlayed>    
+                <div>
                    {{currentMatchDetails?.home}}
                    {{currentMatchDetails?.homeScore}} v {{currentMatchDetails?.awayScore}} 
                    {{currentMatchDetails?.away}}
                 
                 </div>
+            </ng-template>
             <br/>
         </ion-title>
          <ion-buttons slot="end">
@@ -24,7 +32,7 @@
         
     <ion-card>
           <ion-card-header *ngIf="currentMatchDetails?.date">
-               {{currentMatchDetails?.date.seconds * 1000 | date:'h:mm a' }}, {{currentMatchDetails?.date.seconds * 1000 | date:'d MMM yy' }},{{currentMatchDetails?.venue}}
+               {{currentMatchDetails?.date.seconds * 1000 | date:'h:mm a' }}, {{currentMatchDetails?.date.seconds * 1000 | date:'d MMM yyyy' }}, {{currentMatchDetails?.venue}}
         </ion-card-header>
       <ion-card-content>
          <ion-list>  
@@ -53,7 +61,7 @@
       </ion-card-content>
     </ion-card>
     
-     <ion-card *ngIf="matchReportParagraphs?.length > 0">
+     <ion-card *ngIf="matchReportParagraphs?.length > 0" class="left-align-text">
          <ion-card-header>
             Match Report
          </ion-card-header>

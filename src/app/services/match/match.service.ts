@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 @Injectable({
@@ -17,9 +18,10 @@ export class MatchService {
  public conversionScorersRef: firebase.firestore.CollectionReference;
  public dropGoalScorersRef: firebase.firestore.CollectionReference;
  public paragraphsRef: firebase.firestore.CollectionReference;
- 
+ //private firestore: AngularFirestore;
     
   constructor() { 
+      //private firestore: AngularFirestore) { 
       this.matchesRef = firebase.firestore().collection('/matches');
    }
 
@@ -61,5 +63,23 @@ export class MatchService {
        this.paragraphsRef = firebase.firestore().collection('/matches/' + matchId + '/paragraphs');
        return this.paragraphsRef;
     }
+  
+ createMatch(homeTeam: string, awayTeam: string , matchDate: Date, team: string, competition: string, venue: string): Promise<firebase.firestore.DocumentReference> {
+      
+      return this.matchesRef.add({
+      home: homeTeam,
+      homeScore: "",
+      away: awayTeam,
+      awayScore: "",
+      date: new Date(matchDate),
+      team: team,
+      competition: competition,
+      venue: venue,     
+    });
+  }
+    
+ deleteMatch(matchId) {
+      firebase.firestore().doc('matches/' + matchId).delete();
+  }
 
 }
