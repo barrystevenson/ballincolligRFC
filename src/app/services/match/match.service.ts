@@ -108,6 +108,8 @@ createLineup(matchId, lineupDetails): Promise<firebase.firestore.DocumentReferen
       number: lineupDetails.number,
       firstName: lineupDetails.firstName,
       surname: lineupDetails.surname
+      
+
                                       
     });*/
 }
