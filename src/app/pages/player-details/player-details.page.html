@@ -23,11 +23,11 @@
     <ion-card-title>{{currentPlayerDetails?.firstName}} {{currentPlayerDetails?.surname}}</ion-card-title>
  </ion-card-header>   
  <ion-list>
-   
-    
+       
+     
     <ion-item>
       <ion-label>
-          DOB: <font *ngIf="currentPlayerDetails?.dateOfBirth">{{currentPlayerDetails?.dateOfBirth.seconds * 1000 | date:'d/MMM/yyyy' }}</font>
+          Age: <font *ngIf="currentPlayerDetails?.dateOfBirth != '' ">{{this.age}}</font>
       </ion-label>
     </ion-item>
      

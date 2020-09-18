@@ -14,23 +14,34 @@ export class PlayerDetailsPage implements OnInit {
   
   public currentPlayerDetails: any = {};
   public previousClubs: Array<any>;
- 
+  public age: number;
+    
     constructor(private playersService: PlayersService,
                 private helperService: HelperService, 
                 private route: ActivatedRoute, 
                 private location: Location) { }
 
  ngOnInit() {
-    const playerId: string = this.route.snapshot.paramMap.get('id');
+     const playerId: string = this.route.snapshot.paramMap.get('id');
     
      this.returnPlayerDetails(playerId);
      this.returnPreviousClubs(playerId);
-     }
+ }
        
     private async returnPlayerDetails(playerId: string){
         const playerDetailsSnapshot = await this.playersService.getPlayerDetails(playerId).get();
+        
         this.currentPlayerDetails = playerDetailsSnapshot.data();
-        this.currentPlayerDetails.id = playerDetailsSnapshot.id; 
+        this.currentPlayerDetails.id = playerDetailsSnapshot.id;
+        
+        if (this.currentPlayerDetails.dateOfBirth != ""){
+        
+            var ageDif = Date.now() - this.currentPlayerDetails.dateOfBirth.toDate().getTime(); 
+            var ageDate = new Date(ageDif); // miliseconds from epoch
+            this.age =  Math.abs(ageDate.getUTCFullYear() - 1970);
+        }
+           
+    
     }
     
     private async returnPreviousClubs(playerId: string){
@@ -45,6 +56,7 @@ export class PlayerDetailsPage implements OnInit {
             });
              this.helperService.addCommasToArray(this.previousClubs);   
     }
+    
     
     goBack() {
     this.location.back();

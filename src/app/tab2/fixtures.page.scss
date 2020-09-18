@@ -19,17 +19,6 @@ ion-row {
     --ion-grid-column-padding: 50px;
 }
 
-.firstsGame{
-    ion-card{
-        border-top-color: red;
-    }
-}
-
-.secondsGame{
-    ion-card{
-        border-top-color: blue;
-    }
-}
 
 .wGame 
     {
@@ -50,4 +39,11 @@ ion-row {
       font-weight: bold;
       border-top: 2px solid;
       border-top-color: green;    
+    }
+    
+.secondsGame 
+    {
+      font-weight: bold;
+      border-top: 2px solid;
+      border-top-color: yellow;    
     }

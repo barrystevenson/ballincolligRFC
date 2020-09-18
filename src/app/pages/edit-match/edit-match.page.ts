@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { MatchService } from './../../services/match/match.service';
 import { HelperService } from './../../services/helper/helper.service';
 import { PlayersService } from './../../services/players/players.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-edit-match',
@@ -23,18 +22,21 @@ export class EditMatchPage implements OnInit {
   public matchReportParagraphs: Array<any>;
   public emptyLineup: Array<any>; 
 
-  public homeTeam: any;
-  public awayTeam: any;
-  public team: any;
-  public competition: any;
-  public venue: any;
-  public matchDate: any;
+  public homeTeam: string;
+  public awayTeam: string;
+  public team: string;
+  public competition: string;
+  public venue: string;
+  public matchDate: Date;
+  public homeScore: string;
+  public awayScore: string;
+    
     
     constructor(private matchService: MatchService, 
                 private playersService: PlayersService, 
                 private helperService: HelperService, 
                 private route: ActivatedRoute, 
-                private router: Router) { }
+                private router: Router) {}
 
   ngOnInit() {
     const matchId: string = this.route.snapshot.paramMap.get('id');
@@ -47,7 +49,8 @@ export class EditMatchPage implements OnInit {
     this.returnDropGoalScorers(matchId);
     this.returnAllPlayers();
     this.returnAllParagraphs(matchId);
-     }
+ }
+   
     
     /*
      * Return Match Details
@@ -56,7 +59,9 @@ export class EditMatchPage implements OnInit {
     private async returnMatchDetails(matchId: string){     
         const matchDetailsSnapshot = await this.matchService.getMatch(matchId).get();
         this.currentMatchDetails = matchDetailsSnapshot.data();
-        this.currentMatchDetails.id = matchDetailsSnapshot.id; 
+        this.currentMatchDetails.id = matchDetailsSnapshot.id;  
+        this.currentMatchDetails.date = this.currentMatchDetails.date.toDate();     
+         
     }
     
     /*
@@ -194,23 +199,28 @@ export class EditMatchPage implements OnInit {
             });
     }
  
-  updateMatch(): void {
-      /*if (
-        homeTeam === undefined ||
-        awayTeam === undefined ||
-        team === undefined ||
-        competition === undefined ||
-        venue === undefined || 
-        matchDate === undefined 
-      ) {
-        return;
-      }
-      this.matchService
-        .createMatch(homeTeam, awayTeam, matchDate, team, competition, venue, )
-        .then(() => {
-          this.router.navigateByUrl('admin-home');
-        });*/
-    }
+  updateMatch(matchId): void {
+      
+    let matchDetails = {};
+    
+    if (this.homeScore != null)
+        {
+        matchDetails['homeScore'] = this.homeScore;        
+        }
+    if (this.awayScore != null)
+        {
+        matchDetails['awayScore'] = this.awayScore;      
+        }    
+    matchDetails['homeTeam'] = this.homeTeam;
+    matchDetails['awayTeam'] = this.awayTeam;
+    matchDetails['team'] = this.team;
+    matchDetails['competition'] = this.competition;
+    matchDetails['venue'] = this.venue;
+    matchDetails['date'] = this.matchDate;
+    this.matchService.updateMatch(matchId, matchDetails);
+    this.router.navigateByUrl('admin-home');
+    
+  }
 
 }
 

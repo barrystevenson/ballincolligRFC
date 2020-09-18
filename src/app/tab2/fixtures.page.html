@@ -1,6 +1,10 @@
 <ion-content #content>
       
-    <ion-card *ngFor="let match of matches; let i = index"  tappable routerLink="/../match-details-standard/{{match.id}}" id='{{i}}' [ngClass]="{'wGame': match?.team =='Women\'s','firstsGame': match?.team == '1st XV','u18sGame':match?.team == 'U-18'}">
+    <!--ion-card *ngFor="let match of matches; let i = index"  tappable routerLink="/../match-details-standard/{{match.id}}" id='{{i}}' [ngClass]="{'wGame': match?.team =='Women\'s','firstsGame': match?.team == '1st XV','u18sGame':match?.team == 'U-18', 'secondsGame':match?.team == '2nd XV'}"-->
+    
+    <ion-card *ngFor="let match of matches; let i = index"  tappable routerLink="/../match-details/match-details-info/{{match.id}}" id='{{i}}' [ngClass]="{'wGame': match?.team =='Women\'s','firstsGame': match?.team == '1st XV','u18sGame':match?.team == 'U-18', 'secondsGame':match?.team == '2nd XV'}">
+    
+    <!--ion-card *ngFor="let match of matches; let i = index"  tappable [routerLink]="['/','match-details',match.id, 'match-details-info']" id='{{i}}' [ngClass]="{'wGame': match?.team =='Women\'s','firstsGame': match?.team == '1st XV','u18sGame':match?.team == 'U-18', 'secondsGame':match?.team == '2nd XV'}"-->
     
          <ion-card-content>
             <ion-grid >
@@ -8,9 +12,9 @@
                     <ion-col></ion-col>
                     <ion-col></ion-col>
                     <ion-col class="team" col-3>
-                        <font *ngIf="match?.team == 'Women\'s'; else mensGame">W </font>
+                        <font *ngIf="match?.team == 'Women\'s'; else mensGame">W</font>
                         <ng-template #mensGame>
-                            <font>{{match?.team}} </font>
+                            <font>{{match?.team}}</font>
                         </ng-template>
                         <font *ngIf="match?.competition == 'League'; else friendlyGame">L</font>
                         <ng-template #friendlyGame>

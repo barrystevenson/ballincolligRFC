@@ -18,7 +18,7 @@ export class MatchService {
  public conversionScorersRef: firebase.firestore.CollectionReference;
  public dropGoalScorersRef: firebase.firestore.CollectionReference;
  public paragraphsRef: firebase.firestore.CollectionReference;
- //private firestore: AngularFirestore;
+ 
     
   constructor() { 
       //private firestore: AngularFirestore) { 
@@ -78,8 +78,41 @@ export class MatchService {
     });
   }
     
+updateMatch(matchId, matchDetails){
+    
+      return firebase.firestore().doc('/matches/' + matchId).set({
+      home: matchDetails.homeTeam,
+      homeScore: matchDetails.homeScore,
+      away: matchDetails.awayTeam,
+      awayScore: matchDetails.awayScore,
+      date: new Date(matchDetails.date),
+      team: matchDetails.team,
+      competition: matchDetails.competition,
+      venue: matchDetails.venue,     
+    });
+}  
+    
  deleteMatch(matchId) {
       firebase.firestore().doc('matches/' + matchId).delete();
   }
+
+createLineup(matchId, lineupDetails): Promise<firebase.firestore.DocumentReference>{
+    
+            return firebase.firestore().collection('/matches/' + matchId + '/lineup/').add({
+            number: lineupDetails.number,
+            firstName: lineupDetails.firstName,
+            surname: lineupDetails.surname,   
+        });
+   
+      /*return firebase.firestore().doc('/matches/' + matchId + '/lineup/' + lineupId ).set({
+      number: lineupDetails.number,
+      firstName: lineupDetails.firstName,
+      surname: lineupDetails.surname
+                                      
+    });*/
+}
+
+    
+    
 
 }

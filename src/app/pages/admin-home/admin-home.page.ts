@@ -42,7 +42,7 @@ export class AdminHomePage implements OnInit {
                 });                
        
         });   
-  }
+    }
 
   logOut(): void {
     this.authService.logoutUser().then( () => {

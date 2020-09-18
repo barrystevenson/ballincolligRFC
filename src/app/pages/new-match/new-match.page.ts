@@ -36,7 +36,7 @@ export class NewMatchPage implements OnInit {
         return;
       }
       this.matchService
-        .createMatch(homeTeam, awayTeam, matchDate, team, competition, venue, )
+        .createMatch(homeTeam, awayTeam, matchDate, team, competition, venue,)
         .then(() => {
           this.router.navigateByUrl('admin-home');
         });

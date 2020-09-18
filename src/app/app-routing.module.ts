@@ -4,8 +4,7 @@ import { AuthGuard } from './services/user/auth.guard';
 
 const routes: Routes = [
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
-  { path: 'news/:id', loadChildren: './pages/news/news.module#NewsPageModule' },
-  // { path: 'match-details/:id', loadChildren: './pages/match-details/match-details.module#MatchDetailsPageModule' },
+  { path: 'match-details', loadChildren: './pages/match-details/match-details.module#MatchDetailsPageModule' },
   { path: 'match-details-standard/:id', loadChildren: './pages/match-details-standard/match-details-standard.module#MatchDetailsStandardPageModule' },
   { path: 'player-details/:id', loadChildren: './pages/player-details/player-details.module#PlayerDetailsPageModule' },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
@@ -13,12 +12,9 @@ const routes: Routes = [
   { path: 'reset-password', loadChildren: './pages/reset-password/reset-password.module#ResetPasswordPageModule' },
   { path: 'admin-home', loadChildren: './pages/admin-home/admin-home.module#AdminHomePageModule', canActivate: [AuthGuard]  },
   { path: 'new-match', loadChildren: './pages/new-match/new-match.module#NewMatchPageModule', canActivate: [AuthGuard]  },
-  { path: 'edit-match/:id', loadChildren: './pages/edit-match/edit-match.module#EditMatchPageModule', canActivate: [AuthGuard] }
-
-  //{ path: 'admin-fixtures', loadChildren: './pages/admin-home/admin-fixtures/admin-fixtures.module#AdminFixturesPageModule' }
-  //{ path: 'admin-players', loadChildren: './pages/admin-home/admin-players/admin-players.module#AdminPlayersPageModule' },
-  //{ path: 'admin-admins', loadChildren: './pages/admin-home/admin-admins/admin-admins.module#AdminAdminsPageModule' },
-
+  { path: 'match-details', loadChildren: './pages/match-details/match-details.module#MatchDetailsPageModule' },
+  { path: 'edit-match-tabs', loadChildren: './pages/edit-match-tabs/edit-match-tabs.module#EditMatchTabsPageModule', canActivate: [AuthGuard] },
+  { path: 'edit-match/:id', loadChildren: './pages/edit-match/edit-match.module#EditMatchPageModule', canActivate: [AuthGuard] },
 
   ];
 @NgModule({

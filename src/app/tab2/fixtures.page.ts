@@ -16,9 +16,15 @@ export class FixturesPage implements OnInit {
     constructor(private matchService: MatchService) {}
         
     ngOnInit(){
+    
+    //Currently hardcoded but eventually I want to read this from firebase, the user will be able to set the date in the admin page.  
+    var seasonStartDate = new Date("2020-08-01");
+        
         this.matchService.getMatches().get().then(matchSnapshot => {
             this.matches= [];
             matchSnapshot.forEach(snap => {
+                //Only show fixtures that take place after the seasonStartDate
+                if (snap.data().date.toDate() >= seasonStartDate ){
                 this.matches.push ({  
                 id: snap.id,
                     date: snap.data().date,
@@ -28,7 +34,7 @@ export class FixturesPage implements OnInit {
                     homeScore: snap.data().homeScore,
                     awayScore: snap.data().awayScore,
                     competition: snap.data().competition,
-                });
+                });}
                 return false;
                 });                
       

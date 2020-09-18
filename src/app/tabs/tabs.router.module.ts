@@ -7,15 +7,7 @@ const routes: Routes = [
     path: 'tabs',
     component: TabsPage,
     children: [
-      {
-        path: 'news',
-        children: [
-          {
-            path: '',
-            loadChildren: '../tab1/news.module#NewsPageModule'
-          }
-        ]
-      },
+     
       {
         path: 'fixtures',
         children: [

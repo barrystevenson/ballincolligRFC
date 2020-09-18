@@ -1,0 +1,71 @@
+
+<ion-content>
+
+    <ion-card >
+     <!--ion-card-content *ngIf="lineup?.length > 0 ; else noLineup "-->
+     <!--ion-card-content *ngIf="lineup?.length > 0">
+         <ion-list *ngFor="let player of lineup; let i = index">  
+            <ion-item>
+                <ion-input readonly
+                    value="{{player?.number}}."
+                    type="text">
+                </ion-input>
+                <ion-input 
+                    value="{{player?.firstName}}"
+                    type="text">
+                </ion-input>
+                <ion-input 
+                    value="{{player?.surname}}"
+                    type="text">
+                </ion-input>
+            </ion-item>
+        </ion-list>
+      </ion-card-content>
+     <!--ng-template #noLineup>    
+        <ion-card-content>
+         <ion-list *ngFor="let players of ' '.repeat(20).split(''), let x = index">  
+             <ion-item>
+                <ion-input
+                    value="{{x+1}}."
+                    type="text" readonly>
+                </ion-input>
+                <ion-input [(ngModel)]="firstName"
+                    type="text">
+                </ion-input>
+                <ion-input [(ngModel)]="surname"
+                    type="text">
+                </ion-input>
+            </ion-item>
+        </ion-list>
+      </ion-card-content>
+    <!--/ng-template-->
+    <ion-card-content>
+         <!--ion-list *ngFor="let players of ' '.repeat(20).split(''), let x = index"-->  
+         <ion-list>  
+            <ion-item>
+                <ion-input 
+                    [(ngModel)]="number"
+                    type="number"
+                   >
+                </ion-input>
+                <ion-input
+                    [(ngModel)]="firstName"       
+                    type="text">
+                </ion-input>
+                <ion-input 
+                    [(ngModel)]="surname"       
+                    type="text">
+                </ion-input>
+            </ion-item>
+        </ion-list>      
+        </ion-card-content>
+    </ion-card> 
+  
+   <ion-button
+    color="black"
+    expand="block"
+    (click)="updateLineup(currentMatchDetails?.id)">
+    Update Lineup
+  </ion-button>
+    
+</ion-content>

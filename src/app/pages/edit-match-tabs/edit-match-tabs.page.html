@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="black" class="ion-icon-toolbar">
+        <ion-buttons slot="start"><ion-button href="/admin-home"> <ion-icon slot="icon-only" name="arrow-back"></ion-icon></ion-button></ion-buttons>
+         <ion-title>
+            <div class="small-text">{{currentMatchDetails?.team}} {{currentMatchDetails?.competition}}</div>
+            <br/>
+            
+                <div *ngIf="currentMatchDetails?.homeScore != ''; else matchNotPlayed">
+                   {{currentMatchDetails?.home}}
+                   {{currentMatchDetails?.homeScore}} - {{currentMatchDetails?.awayScore}} 
+                   {{currentMatchDetails?.away}}
+                
+                </div>
+             <ng-template #matchNotPlayed>    
+                <div>
+                   {{currentMatchDetails?.home}}
+                   {{currentMatchDetails?.homeScore}} v {{currentMatchDetails?.awayScore}} 
+                   {{currentMatchDetails?.away}}
+                
+                </div>
+            </ng-template>
+            <br/>
+        </ion-title>
+         <ion-buttons slot="end">
+        <ion-icon slot="end" src="../../assets/icon/logo.svg" size="large"></ion-icon>
+    </ion-buttons>
+   </ion-toolbar>
+    
+</ion-header>
+
+<ion-content  padding>
+
+<ion-tabs>
+
+  <ion-tab-bar slot="top" color="black">
+   
+    <ion-tab-button tab="edit-match-info/{{currentMatchDetails?.id}}">
+      <ion-label>Information</ion-label>
+    </ion-tab-button>
+      
+    <ion-tab-button tab="edit-match-lineup/{{currentMatchDetails?.id}}">
+      <ion-label>Lineup</ion-label>
+    </ion-tab-button>
+      
+    <ion-tab-button tab="edit-match-scorers/{{currentMatchDetails?.id}}">
+      <ion-label>Scorers</ion-label>
+    </ion-tab-button>  
+   
+  </ion-tab-bar>
+
+</ion-tabs>
+    
+ 
+
+</ion-content>

@@ -1,11 +1,10 @@
 <ion-header>
   <ion-toolbar color="black" class="ion-icon-toolbar">
         <ion-buttons slot="start">
-            <!--ion-button routerLink="../admin-home"> 
+            <ion-button routerLink="../admin-home"> 
                 <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
             </ion-button>
-            <ion-back-button defaultHref="/admin-home"></ion-back-button-->
-            <ion-back-button></ion-back-button>
+            <ion-back-button defaultHref="/admin-home"></ion-back-button>
       </ion-buttons>
     <ion-title>Create New Match</ion-title>
     <ion-buttons slot="end">
@@ -48,10 +47,12 @@
 
       <ion-item>
         <ion-label position="stacked" >Team</ion-label>
-         <ion-input
-         [(ngModel)]="team"
-          type="text">
-        </ion-input>
+        <ion-select [(ngModel)]="team">
+            <ion-select-option value="1st XV">1st XV</ion-select-option>
+            <ion-select-option value="2nd XV">2nd XV</ion-select-option>
+            <ion-select-option value="Women's">Women's</ion-select-option>
+            <ion-select-option value="U-18">U-18</ion-select-option>
+        </ion-select>
       </ion-item>
       
       <ion-item>

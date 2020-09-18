@@ -1,7 +1,9 @@
     
 <ion-content padding>
+        
   <ion-list>
-    <ion-item *ngFor="let player of players" tappable routerLink="/../player-details/{{player.id}}">
+
+      <ion-item *ngFor="let player of players" tappable routerLink="/../player-details/{{player.id}}">
         <ion-avatar slot="start">
           <img [src]="player?.photoLocation || '/assets/images/noavatar.png'">
         </ion-avatar>
@@ -10,6 +12,8 @@
        </ion-label>
     </ion-item>
   </ion-list>
+    
+   
 </ion-content>
     
     

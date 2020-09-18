@@ -27,5 +27,7 @@ export class PlayersPage implements OnInit {
                 return false;
                 });
         });
+    
+
     }
 }
